@@ -9,16 +9,22 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    body, html {
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #ffe0f0, #ffd6e0, #fff0f5, #fbe0f2);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      background-attachment: fixed;
       color: #333;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     body::before {
@@ -33,124 +39,156 @@
       z-index: -1;
     }
 
-    @keyframes gradientBG {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-
     .container {
-      max-width: 600px;
-      width: 90%;
-      margin: 0 auto;
-      padding: 40px 20px 100px;
+      max-width: 500px;
+      margin: auto;
+      padding: 30px 20px;
+      text-align: center;
     }
 
     h1 {
-      font-size: 1.8em;
+      font-size: 1.7em;
       color: #d63384;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     p {
       font-size: 1.1em;
       margin-top: 0;
+      line-height: 1.6;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .buttons {
       margin-top: 30px;
       position: relative;
-      height: 80px;
+      height: 100px;
     }
 
     button {
       font-size: 1em;
-      padding: 12px 24px;
+      padding: 12px 26px;
       margin: 10px;
       border: none;
-      border-radius: 25px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: transform 0.3s ease, background 0.3s;
+      transition: all 0.3s ease;
       z-index: 2;
       position: relative;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
 
     #yesBtn {
-      background-color: #ff69b4;
+      background: linear-gradient(45deg, #ff69b4, #ff85c1);
       color: white;
     }
 
     #yesBtn:hover {
-      background-color: #ff85c1;
+      transform: scale(1.05);
     }
 
     #noBtn {
-      background-color: #ccc;
-      color: #333;
+      background-color: #eee;
+      color: #444;
       position: absolute;
       touch-action: none;
     }
 
-    .message, .timeline {
+    .message {
       display: none;
-      animation: fadeIn 1s ease-in-out;
-      font-size: 1.2em;
+      font-size: 1.1em;
       color: #c2185b;
       margin-top: 40px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .message p {
+      border-left: 3px solid #ffb6c1;
+      padding-left: 10px;
+      margin-top: 10px;
+      font-style: italic;
+      animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: pink; }
     }
 
     .timeline {
-      text-align: left;
-      background: #fff5fb;
+      display: none;
+      background: #fff7fb;
       padding: 20px;
       border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-top: 30px;
       font-size: 0.95em;
-      margin-bottom: 60px;
+      overflow-x: auto;
     }
 
     .timeline h3 {
-      margin-bottom: 10px;
       color: #ff4081;
+      margin-bottom: 10px;
     }
 
     .timeline ul {
       list-style: none;
       padding: 0;
-      line-height: 1.6;
+      margin: 0;
+      text-align: left;
     }
 
     .timeline ul li::before {
-      content: "🌸";
+      content: "💗";
       margin-right: 10px;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    @media (max-width: 500px) {
+    @media (max-width: 480px) {
       h1 {
-        font-size: 1.5em;
+        font-size: 1.4em;
       }
 
-      .timeline {
-        font-size: 0.9em;
+      .message p {
+        font-size: 0.95em;
+        white-space: normal;
+        animation: none;
+        width: 100%;
       }
 
       button {
-        font-size: 0.9em;
+        font-size: 0.95em;
         padding: 10px 20px;
+      }
+
+      .timeline {
+        font-size: 0.88em;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Hi Charity (pa Doremi ko) 💌</h1>
-    <p>Palagi akong natutuwa sayo. Thank you for making me smile.<br/>
+    <h1>Hi kyut na cashier sa DOREMI 💌</h1>
+    <p>Palagi akong natutuwa sayo. Thank you for making me smile sa tuwing napapadaan ako diyan sa DOREMI.<br/>
     I am your greatest fan. Will you be my partner/kakampi?</p>
 
     <div class="buttons" id="buttonsContainer">
@@ -168,9 +206,9 @@
       <ul>
         <li>Feb 14 – First time kitang nakita sa Doremi</li>
         <li>Feb 17 – Inaccept mo friend request ko</li>
-        <li>Mar 21 – Una mong sinabi ang “hi” 🥺</li>
+        <li>Mar 21 – Una chat na “hi” 🥺</li>
         <li>Apr 9 – First date natin 💕</li>
-        <li>Apr 25 – Nagkaroon tayo ng mutual understanding 😘</li>
+        <li>Apr 25 – NMU 😘</li>
       </ul>
     </div>
   </div>
@@ -182,11 +220,10 @@
     const responseMessage = document.getElementById('responseMessage');
     const timelineSection = document.getElementById('timelineSection');
 
-    // Make the "No" button move when hovered or touched
     function moveNoButton() {
       const container = buttonsContainer;
       const maxX = container.clientWidth - noBtn.clientWidth;
-      const maxY = container.clientHeight;
+      const maxY = container.clientHeight - noBtn.clientHeight;
 
       const randomX = Math.floor(Math.random() * maxX);
       const randomY = Math.floor(Math.random() * maxY);
@@ -206,7 +243,6 @@
       timelineSection.style.display = 'block';
       buttonsContainer.style.display = 'none';
 
-      // Scroll to the message smoothly
       setTimeout(() => {
         responseMessage.scrollIntoView({ behavior: 'smooth' });
       }, 300);
