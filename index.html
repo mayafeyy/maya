@@ -9,21 +9,28 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(-45deg, #ffe0f0, #ffd6e0, #fff0f5, #fbe0f2);
+      background: linear-gradient(135deg, #ffe0f0, #ffd6e0, #fff0f5, #fbe0f2);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-      text-align: center;
-      overflow-x: hidden;
+      background-attachment: fixed;
       color: #333;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://www.transparenttextures.com/patterns/hearts.png');
+      opacity: 0.15;
+      z-index: -1;
     }
 
     @keyframes gradientBG {
@@ -35,40 +42,47 @@
     .container {
       max-width: 600px;
       width: 90%;
-      padding: 30px 20px;
-      margin-top: 30px;
+      margin: 0 auto;
+      padding: 40px 20px 100px;
     }
 
     h1 {
       font-size: 1.8em;
       color: #d63384;
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 1.1em;
+      margin-top: 0;
     }
 
     .buttons {
-      margin-top: 25px;
+      margin-top: 30px;
       position: relative;
-      height: 60px;
+      height: 80px;
     }
 
     button {
       font-size: 1em;
-      padding: 10px 20px;
+      padding: 12px 24px;
       margin: 10px;
       border: none;
-      border-radius: 20px;
+      border-radius: 25px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, background 0.3s;
       z-index: 2;
       position: relative;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
     #yesBtn {
       background-color: #ff69b4;
       color: white;
+    }
+
+    #yesBtn:hover {
+      background-color: #ff85c1;
     }
 
     #noBtn {
@@ -79,11 +93,11 @@
     }
 
     .message, .timeline {
-      margin-top: 40px;
       display: none;
       animation: fadeIn 1s ease-in-out;
       font-size: 1.2em;
       color: #c2185b;
+      margin-top: 40px;
     }
 
     .timeline {
@@ -93,7 +107,7 @@
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       font-size: 0.95em;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
     }
 
     .timeline h3 {
@@ -128,7 +142,7 @@
 
       button {
         font-size: 0.9em;
-        padding: 8px 16px;
+        padding: 10px 20px;
       }
     }
   </style>
@@ -138,7 +152,7 @@
     <h1>Hi Charity (pa Doremi ko) 💌</h1>
     <p>Palagi akong natutuwa sayo. Thank you for making me smile.<br/>
     I am your greatest fan. Will you be my partner/kakampi?</p>
-    
+
     <div class="buttons" id="buttonsContainer">
       <button id="yesBtn">Oo naman 💖</button>
       <button id="noBtn">Ayoko 😅</button>
@@ -168,7 +182,7 @@
     const responseMessage = document.getElementById('responseMessage');
     const timelineSection = document.getElementById('timelineSection');
 
-    // Move the "No" button randomly on hover and touch
+    // Make the "No" button move when hovered or touched
     function moveNoButton() {
       const container = buttonsContainer;
       const maxX = container.clientWidth - noBtn.clientWidth;
@@ -190,11 +204,9 @@
     yesBtn.addEventListener('click', () => {
       responseMessage.style.display = 'block';
       timelineSection.style.display = 'block';
-
-      // Hide buttons after click to avoid interference
       buttonsContainer.style.display = 'none';
 
-      // Scroll into view on mobile
+      // Scroll to the message smoothly
       setTimeout(() => {
         responseMessage.scrollIntoView({ behavior: 'smooth' });
       }, 300);
